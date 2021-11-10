@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/JrGiant-Tech/GitHub-read-time-badge#readme",
   "dependencies": {
+    "minimist": "^1.2.5",
     "reading-time": "^1.5.0",
     "striptags": "^3.2.0"
+  },
+  "bin": {
+    "read-time-badge": "./src/index.js"
   }
 }

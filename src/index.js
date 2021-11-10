@@ -1,4 +1,6 @@
-const path = require('path');
+#!/usr/bin/env node
+// const path = require('path');
+
 const fs = require('fs');
 const readline = require('readline')
 const striptags = require('striptags');
@@ -25,8 +27,10 @@ async function processLineByLine(fileName) {
     // console.log("readingTimeStream.stats", readingTimeStream.stats)
     return readingTimeStream.stats;
 }
-
-let [fileToRead] = process.argv.slice(process.argv.indexOf(__filename) + 1)
+const args = require('minimist')(process.argv.slice(process.argv.indexOf(__filename) + 1))
+// console.log("🚀 ~ file: index.js ~ line 31 ~ args", args)
+// ToDo: add badge flag
+let [fileToRead] = args['file'] ? [args['file']] : args._.slice(args._.indexOf(__filename) + 1)
 let stripTagsStream = striptags.init_streaming_mode();
 (async function runner(params) {
     const results = await processLineByLine(fileToRead);
