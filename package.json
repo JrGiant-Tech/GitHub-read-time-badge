@@ -1,0 +1,23 @@
+{
+  "name": "github-read-time-badge",
+  "version": "0.0.1",
+  "description": "Adding a reading time badge to your readme",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JrGiant-Tech/GitHub-read-time-badge.git"
+  },
+  "author": "Joshua Rose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JrGiant-Tech/GitHub-read-time-badge/issues"
+  },
+  "homepage": "https://github.com/JrGiant-Tech/GitHub-read-time-badge#readme",
+  "dependencies": {
+    "reading-time": "^1.5.0",
+    "striptags": "^3.2.0"
+  }
+}
