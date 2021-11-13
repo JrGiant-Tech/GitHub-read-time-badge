@@ -1,12 +1,10 @@
 #!/usr/bin/env node
-// const path = require('path');
-
 const fs = require('fs');
 const readline = require('readline')
 const striptags = require('striptags');
 const ReadingTimeStream = require('reading-time/lib/stream');
 const readingTimeStream = new ReadingTimeStream()
-// console.dir(readingTimeStream)
+
 
 async function processLineByLine(fileName) {
     const fileStream = fs.createReadStream(fileName);
@@ -27,12 +25,23 @@ async function processLineByLine(fileName) {
     // console.log("readingTimeStream.stats", readingTimeStream.stats)
     return readingTimeStream.stats;
 }
-const args = require('minimist')(process.argv.slice(process.argv.indexOf(__filename) + 1))
-// console.log("🚀 ~ file: index.js ~ line 31 ~ args", args)
+// Use minialist to allow for flags
+const args = require('minimist')(process.argv)
+
+let index;
+for (let i = 0; i < args._.length; i++) {
+    if (/\.md$/.test(args._[i])) {
+        index = i;
+        break;
+    }
+
+}
+
 // ToDo: add badge flag
-let [fileToRead] = args['file'] ? [args['file']] : args._.slice(args._.indexOf(__filename) + 1)
+let [fileToRead] = args['file'] ? [args['file']] : args._.slice(index)
 let stripTagsStream = striptags.init_streaming_mode();
-(async function runner(params) {
+(async function runner() {
     const results = await processLineByLine(fileToRead);
+
     console.log(results)
 })()

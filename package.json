@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/JrGiant-Tech/GitHub-read-time-badge#readme",
   "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
     "minimist": "^1.2.5",
     "reading-time": "^1.5.0",
     "striptags": "^3.2.0"
