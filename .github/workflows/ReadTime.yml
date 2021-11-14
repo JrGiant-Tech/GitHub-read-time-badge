@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: setup node
       uses: actions/setup-node@v2
-    - uses: actions/checkout@2
+    - uses: actions/checkout@v2
       with: 
         path: 'repo'
     - name: Get Github-read-time-badge package
