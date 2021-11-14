@@ -20,10 +20,12 @@ jobs:
         npm i -g github-read-time-badge
         x=$(find repo -maxdepth 1 -iname readme.md)
         read-time-badge $x
+        cd repo
         git config --global user.name 'Github Read Time Badge [Bot]'
         git config --global user.email 'joshua-rose@users.noreply.github.com'
         git commit -am "Added/Updated Badge"
         git push
+        cd ..
         rm -fr repo
         exit
 
