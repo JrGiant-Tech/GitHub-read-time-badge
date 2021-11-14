@@ -2,7 +2,7 @@ name: Add Read Time Badge
 on:
   push:
     paths:
-    - 'readme.md'
+    - 'README.md'
 jobs:
   build:
     runs-on: ubuntu-latest
