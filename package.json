@@ -24,6 +24,6 @@
     "striptags": "^3.2.0"
   },
   "bin": {
-    "read-time-badge": "./src/index.js"
+    "read-time-badge": "./src/cli.js"
   }
 }

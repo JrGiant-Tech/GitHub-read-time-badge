@@ -1,22 +1,15 @@
-#!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline')
 const striptags = require('striptags');
 const ReadingTimeStream = require('reading-time/lib/stream');
 const readingTimeStream = new ReadingTimeStream()
+
 class ReadTimeBadge {
 
-    fileToRead = ''
-
-    constructor() {
-        // Use minialist to allow for flags
-    }
-
     async _setup() {
+        // Use minialist to allow for flags
         const args = require('minimist')(process.argv)
-        console.log(args['file'])
-
         this.fileToRead = args['file'] ? [args['file']] : args._.slice(this._getIndexOfFileName(args))[0]
 
     }
@@ -73,17 +66,5 @@ class ReadTimeBadge {
     }
 }
 
+module.exports = ReadTimeBadge
 
-// ToDo: add badge flag
-(async function runner() {
-    try {
-        const readTimeBadge = new ReadTimeBadge();
-        readTimeBadge._setup();
-        await readTimeBadge.processLineByLine();
-        await readTimeBadge.createBadge()
-
-    } catch (error) {
-        console.error(error);
-    }
-
-})()
