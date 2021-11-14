@@ -1,4 +1,7 @@
 # GitHub-read-time-badge
+![Reading Time 1 min read](https://img.shields.io/badge/Read%20Time-1%20min%20read-informational)
+
+
 
 ---
 ## References
