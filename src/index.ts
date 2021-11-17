@@ -1,11 +1,17 @@
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline')
-const striptags = require('striptags');
-const ReadingTimeStream = require('reading-time/lib/stream');
-const readingTimeStream = new ReadingTimeStream()
+import fs = require('fs');
+import path = require('path');
+import readline = require('readline');
+import striptags = require('striptags');
+import { readingTimeStream } from 'reading-time';
+import { ReadTimeResults } from 'reading-time';
+const rts = readingTimeStream()
+
 
 class ReadTimeBadge {
+
+    fileToRead: string;
+    lineArray: string[];
+    readingTimeStats: ReadTimeResults;
 
     async _setup() {
         // Use minialist to allow for flags
@@ -28,11 +34,11 @@ class ReadTimeBadge {
             // Each line in input.txt will be successively available here as `line`.
             this.lineArray.push(line.replace(/\!\[Reading Time \d+ min read\]\(https:\/\/img\.shields\.io\/badge\/Read%20Time-\d+%20min%20read.*\)/, ""));
             const stripppedLine = stripTagsStream(line);
-            readingTimeStream.write(stripppedLine);
+            rts.write(stripppedLine);
         }
-        readingTimeStream.end()
+        rts.end()
         // console.log("readingTimeStream.stats", readingTimeStream.stats)
-        this.readingTimeStats = readingTimeStream.stats;
+        this.readingTimeStats = rts.stats;
 
         // return {stats:readingTimeStream.stats, lineArray};
     }
@@ -49,13 +55,13 @@ class ReadTimeBadge {
         return index;
     }
     createBadge() {
-        return new Promise((res, rej) => {
+        return new Promise<void>((res, rej) => {
             const badgeUrl = `https://img.shields.io/badge/Read Time-${this.readingTimeStats.text}-informational`
             const badgeCode = `![Reading Time ${this.readingTimeStats.text}](${encodeURI(badgeUrl)})`
             this.lineArray.splice(1, 0, badgeCode);
 
             fs.writeFile(path.resolve(this.fileToRead), this.lineArray.join("\n"), 'utf-8', function (err) {
-                if (err) rej(Error(err))
+                if (err) rej(Error(err as any))
                 console.log('Badge Added');
                 res();
             });
